@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="refresh" content="5; url={% url 'Shop_App:home' %} "> 
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Payment Status</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+     <div class="container" style="padding-top: 15px;">
+          <div class="messages container mt-2">
+               {% if messages %}
+                    {% for message in messages %}
+                         <div {% if message.tags %} class="alert alert-{{message.tags}} {% endif %}" role="alert">
+                              {{message}}
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                         </div>
+                    {% endfor %}
+               {% endif %}
+          </div>
+          {% block body_block %} {% endblock%}
+     </div>
+     
+</body>
+</html>
