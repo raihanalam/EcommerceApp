@@ -27,7 +27,7 @@
                          <a href="{% url 'Order_App:increase' pk=cart.item.pk %}" class="mr-2"><span class="badge badge-light"><i class="fas fa-plus"></i></span></a>
                      </td>
                      <td align="right"> &#2547 {{cart.get_total}}</td>
-                     <td><a href="{% url 'Order_App:remove' pk=cart.item.pk %}" class="btn btn-danger btn-sm">Remove From Cart</a></td>
+                     <td><a href="{% url 'Order_App:remove' pk=cart.item.pk %}" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a></td>
 
                </tr>
 
@@ -41,8 +41,8 @@
                <tr>
                     <th scope="row"></th>
                     <td colspan="4" class="text-right">
-                         <a href="{% url 'Shop_App:home' %}" class="btn btn-warning mr-4">Continue Shopping</a>
-                         <a href="{% url 'Payment_App:checkout' %}" class="btn btn-success mr-4">Proceed To Checkout</a>
+                         <a href="{% url 'Shop_App:home' %}" class="btn btn-warning mr-4 mt-2">Continue Shopping</a>
+                         <a href="{% url 'Payment_App:checkout' %}" class="btn btn-success mr-4 mt-2">Proceed To Checkout</a>
                     </td>
                </tr>
 

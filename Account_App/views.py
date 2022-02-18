@@ -9,7 +9,7 @@ from django.contrib.auth import login, logout, authenticate
 
 #Form and models
 from .models import Profile
-from .forms import ProfileForm, SignUpForm
+from .forms import ProfileForm, SignInForm, SignUpForm
 
 #Messages
 from django.contrib import messages
@@ -29,10 +29,10 @@ def sign_up(request):
 
 def sign_in(request):
 
-     form = AuthenticationForm()
+     form = SignInForm()
 
      if request.method == 'POST':
-          form = AuthenticationForm(data=request.POST)
+          form = SignInForm(data=request.POST)
 
           if form.is_valid():
                username = form.cleaned_data.get('username')

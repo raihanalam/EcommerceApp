@@ -5,11 +5,13 @@
 
 {% block body_block %}
 
-<h2>Edit Your Profile</h2>
-<form method='POST'>
-     {{form | crispy}}
-     {% csrf_token%}
-     <button type="submit" class="btn btn-success btn-sm">Update</button>
-</form>
+<div class="container">
+     <h2>Edit Your Profile</h2>
+     <form method='POST'>
+          {{form | crispy}}
+          {% csrf_token%}
+          <button type="submit" class="btn btn-success btn-sm">Update</button>
+     </form>
+</div>
 
 {% endblock%}

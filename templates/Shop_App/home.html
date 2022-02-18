@@ -1,22 +1,61 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block css %}
-
      <style>
-          .my-product{
-               box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
-          }
-          .my-product:hover{
-               box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
-          }
+          
      </style>
 {% endblock%}
+
 {% block body_block %}
-<div class="container my-5">
-     <h2 class="my-5"></h2>
+<div class="container">
      <div class="row">
-          {% for product in object_list%}
+          <div class="col-md-3">
+               
+               <form action="{% url 'Search_App:filter' %}" method="GET">
+                    <select name="category" id="" style="width: 100%; height: 40px;">
+                         <option value="null"> All Categories </option>
+                         {% for category_item in categories_list %}
+                              <option value="{{category_item.title}}">{{category_item.title}}</option>
+                         {% endfor %}
+                    </select><br>
+                    <button type="submit" style="width: 100%; height: 40px;" class="my-2 btn btn-md btn-light">Filter</button>
+               </form>
+          </div>
+          <div class="col-md-9">
+               <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <img class="d-block w-100" src="{% static 'images/laptop.jpg' %}" alt="First slide">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="{% static 'images/Tv-mobile.jpg' %}"" alt="Second slide">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="{% static 'images/table.jpg' %}"" alt="Third slide">
+                      </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </div>
+          </div>
+     </div>
+</div>
+<div class="container">
+     <div class="row my-5">
+          {% for product in product_list%}
           <div class="col-md-6 col-sm-12 col-lg-3 ">
                <a style="text-decoration: none; color: black;" href="{% url 'Shop_App:product_detail' pk=product.pk %}">
                <figure class="card card-product my-product">
@@ -31,8 +70,43 @@
                                    <span class="price-old"><strike>&#2547; {{product.old_price | floatformat:2}}</strike></span>
                               </div>
                          </div>
-                         <a href="{% url 'Order_App:add' pk=product.pk %}" class="btn btn-sm btn-outline-primary text-uppercase"><i class="fas fa-shopping-cart"></i>Add to Cart </a>
-                    
+                         <div class="bottom-wrap">
+                              <a href="{% url 'Order_App:add' pk=product.pk %}" class="btn btn-sm btn-light" style="margin-right: 5px;"> <i class="fa-solid fa-cart-plus"></i> Add to Cart</a>
+                              <a href="{% url 'Order_App:add' pk=product.pk %}" class="btn btn-sm btn-light" data-toggle="modal" data-target="#m-{{product.pk}}"><img src="{% static 'images/view.png'%}" class="img-fluid" height="20px" width="20px" alt=""> Preview</a>
+                         </div>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="m-{{product.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                   </button>
+                                  <div class="modal-body">
+                                       <center>
+                                       <div>
+                                        <img src="/media/{{product.mainimage}}" alt="" class="img-fluid" style="width: 50%; height: 50%;">
+                                       </div>
+                                        <article class="card-body p-5">
+                                             <h3 class="title mp-3" >{{product.name}}</h3>
+                                             <p class="price-detail-wrap">
+                                                  <span class="price h3 text-warning">
+                                                       <span class="currency">  BDT &#2547; </span> <span class="num"> {{product.price}}</span>
+                                                  </span>
+                                             </p>
+                                             <dl class="item-property">
+                                                  <h6>About</h6>
+                                                  <p style="text-align: left;">{{product.preview_text | linebreaks }}</p>
+                                             </dl>
+                                             <a href="{% url 'Order_App:add' pk=product.pk %}" class="my-1 btn btn-md btn-outline-success"> Add to Cart </a>
+                                             <a href="{% url 'Shop_App:product_detail' pk=product.pk %}" class=" my-1 btn btn-outline-primary btn-md"> View Full Details </a>
+                                        </article>
+                                        </center>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                         
                     </figcaption>
 
                </figure>
@@ -40,7 +114,63 @@
           </div>
           {% endfor %}
      </div>
-
+     <section id="features" class="blue">
+          <h3>Flash Sales</h3>
+          <div class="content">
+               <div class="slider responsive">
+                    {% for product in product_list%}
+                         {% if forloop.counter <= 10 %}
+                         <div>
+                              <div class="card">
+                              </div>
+                         </div>
+                         {% endif %}
+                    {% endfor %}
+               </div>
+          </div>
+     </section>
+     
+</div>
+<div class="container-fluid bg-light">
+     <div class="footer">
+          <div class="container py-5">
+          <div class="row">
+               <div class="col-md-3">
+                    <h5><b>Customer Care</b></h5>
+                    <ul>
+                         <li>Help Center</li>
+                         <li>How to Buy</li>
+                         <li>Returns & Refunds</li>
+                         <li>Contact Us</li>
+                         <li>Terms & Conditions</li>
+                    </ul>
+               </div>
+               <div class="col-md-3">
+                    <h5><b>Get to Know Us</b></h5>
+                    <ul>
+                         <li>Careers</li>
+                         <li>Blog</li>
+                         <li>About</li>
+                    </ul>
+               </div>
+               <div class="col-md-4">
+                    <h5><b>Payment Methods</b></h5>
+                    <img src="{% static 'images/payment1.png'%}" alt="" class="img-fluid" width="100%">
+               </div>
+               <div class="col-md-2">
+                    <h5><b>Follow Us</b></h5>
+                    <ul class="d-flex justify-content-between" style="font-size: 40px; color: #6e6b6b;">
+                         <i class="fa-brands fa-facebook-square"></i>
+                         <i class="fa-brands fa-twitter-square"></i>
+                         <i class="fa-brands fa-instagram-square"></i>
+                    </ul>
+               </div>
+          </div>
+          </div>
+     </div>
+</div>
+<div class="container-fluid p-2">
+     <h5 class="text-center"> All rights reserved to © RaihanAlam</h5>
 </div>
 
 

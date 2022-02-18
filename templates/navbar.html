@@ -1,13 +1,18 @@
 {% load cart_tag %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
      <div class="container">
-       <a class="navbar-brand" href="{% url 'Shop_App:home'%}">Django Ecommerce Eshop</a>
+       <a class="navbar-brand" href="{% url 'Shop_App:home'%}">Django E-mart</a>
        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
        </button>
        <div class="collapse navbar-collapse" id="navbarNav">
+        <form class="form-inline ml-auto" action="{% url 'Search_App:search' %}" method="GET">
+          <input class="form-control mr-sm-1" style="width: 320px;" name="search" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-gray my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+        </form>
          
         <ul class="navbar-nav ml-auto">
+            
           {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'Order_App:cart'%}"><i class="fa fa-shopping-cart"></i> Cart <span class="badge badge-light">{{ request.user | cart_total }}</span></a>
@@ -31,7 +36,6 @@
           
         {% endif %}
         </ul>
-        
       </div>
     </div>
 </nav>

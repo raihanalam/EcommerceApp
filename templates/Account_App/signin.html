@@ -1,17 +1,27 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load crispy_forms_tags %}
 {% block title %} Signin {% endblock%}
-{% block css %} {% endblock%}
 
 {% block body_block %}
 
-<h2>Signin Your Account</h2>
-<form method='POST'>
-     {{form | crispy}}
-     {% csrf_token%}
-     <button type="submit" class="btn btn-success btn-sm">Signin</button>
-</form>
-<p>Don't have an account? <a href="{% url 'Account_App:signup'%}">Signup</a></p>
+<div class="container">
+     <div class="sign-page">
+          <center>
+               <div class="sign-in">
+                    <h4>Signin Your Account</h4>
+                    <form method='POST'>
+                         {{form | crispy}}
+                         {% csrf_token%}
+                         <button type="submit" class="btn btn-success btn-sm">Signin</button>
+                    </form>
+                    <p>Don't have an account? <a href="{% url 'Account_App:signup'%}">Signup</a></p>
+                    <p>or,<br>Signin with a test account <span style="text-align: left; color: rgb(124, 117, 117);"><br>username: test@mail.com <br>password: test@1234 </span></p>
+
+               </div>
+          </center>
+     </div>
+</div>
 
 
 {% endblock%}
