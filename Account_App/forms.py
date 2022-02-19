@@ -1,4 +1,3 @@
-import email
 from django import forms
 from django.forms import ModelForm
 from . models import User, Profile
