@@ -48,8 +48,8 @@
                                                        <h6>About</h6>
                                                        <p>{{product.preview_text | linebreaks }}</p>
                                                   </dl>
-                                                  <a href="{% url 'Order_App:add' pk=product.pk %}" class="btn btn-md btn-outline-success">Add to Cart </a>
-                                                  <a href="{% url 'Shop_App:product_detail' pk=product.pk %}" class="btn btn-outline-primary btn-md">View Full Details </a>
+                                                  <a href="{% url 'Order_App:add' pk=product.pk %}" class="btn btn-md btn-outline-success mt-1 mr-1">Add to Cart </a>
+                                                  <a href="{% url 'Shop_App:product_detail' pk=product.pk %}" class="btn btn-outline-primary btn-md mt-1">View Full Details </a>
                                              </article>
                                              </center>
                                        </div>
@@ -82,8 +82,8 @@
                                    </div>
                               </div>
                               <div class="bottom-wrap">
-                                   <a href="{% url 'Order_App:add' pk=product.pk %}" class="btn btn-sm btn-light" style="margin-right: 5px;"> <i class="fa-solid fa-cart-plus"></i> Add to Cart</a>
-                                   <a href="{% url 'Order_App:add' pk=product.pk %}" class="btn btn-sm btn-light" data-toggle="modal" data-target="#m-{{product.pk}}"><img src="{% static 'images/view.png'%}" class="img-fluid" height="20px" width="20px" alt=""> Preview</a>
+                                   <a href="{% url 'Order_App:add' pk=product.pk %}" class="btn btn-sm btn-light mr-1 mt-1"> <i class="fa-solid fa-cart-plus"></i> Add to Cart</a>
+                                   <a href="{% url 'Order_App:add' pk=product.pk %}" class="btn btn-sm btn-light mt-1" data-toggle="modal" data-target="#m-{{product.pk}}"><img src="{% static 'images/view.png'%}" class="img-fluid" height="20px" width="20px" alt=""> Preview</a>
                               </div>
                                  
                                  <!-- Modal -->
@@ -109,8 +109,8 @@
                                                        <h6>About</h6>
                                                        <p>{{product.preview_text | linebreaks }}</p>
                                                   </dl>
-                                                  <a href="{% url 'Order_App:add' pk=product.pk %}" class="btn btn-md btn-outline-success">Add to Cart </a>
-                                                  <a href="{% url 'Shop_App:product_detail' pk=product.pk %}" class="btn btn-outline-primary btn-md">View Full Details </a>
+                                                  <a href="{% url 'Order_App:add' pk=product.pk %}" class="btn btn-md btn-outline-success mr-1 mt-1">Add to Cart </a>
+                                                  <a href="{% url 'Shop_App:product_detail' pk=product.pk %}" class="btn btn-outline-primary btn-md mt-1">View Full Details </a>
                                              </article>
                                              </center>
                                        </div>
